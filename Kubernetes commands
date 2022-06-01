@@ -1,0 +1,79 @@
+-> Start docker daemon service ( can be started using docker desktop )
+
+-> Start minikube
+    minikube start
+
+-> To check the status of minikube
+    minikube status
+
+-> First to create a docker image with a dockerfile
+    docker build -t kub-first-app .
+
+-> Tagging the docker image to dockerhub
+    docker tag kub-first-app ukaran11/kub-first-app
+
+-> Pushing the docker image to dockerhub
+    docker push ukaran11/kub-first-app
+
+-> Creating a deployment with kubectl
+    kubectl create deployment first-app --image=ukaran11/kub-first-app
+
+-> To see all the deployments
+    kubectl get deployments
+
+-> To see all the pods
+    kubectl get pods
+
+-> To see minikube dashboard
+    minikube dashboard
+
+-> Exposing kubernetes deployment/service
+    kubectl expose deployment first-app --type=LoadBalancer --port=8080
+
+-> To see all the services
+    kubectl get services
+
+    minikube service first-app (if this doesn't work try the next command)
+
+    minikube tunnel first-app  (goto http://localhost:8080/)
+
+-> Scaling
+    kubectl scale deployment/first-app --replicas=3
+
+-> Updating deployment
+    kubectl set image deployment/first-app kub-first-app=ukaran11/kub-first-app (Change the tag)
+
+-> To view the current Updating deployment status
+    kubectl rollout status deployment/first-app
+
+-> Rollback deployment
+    kubectl rollout undo deployment/first-app
+
+-> To check the deployment history
+    kubectl rollout history deployment/first-app
+
+-> To see the deployment history of a speicific revision
+    kubectl rollout history deployment/first-app --revision=1
+
+-> Going back to a specific deployment
+    kubectl rollout undo deployment/first-app --to-revision=1
+
+-> Deleting the kubernetes service
+    kubectl delete service first-app
+
+-> Deleting the kubernetes deployment
+    kubectl delete deployment first-app
+
+------------------------------------------------------------------------------------------------------------------------
+Declarative Way 
+------------------------------------------------------------------------------------------------------------------------
+
+Create a deployment.yaml file
+
+-> Applying the deployment file
+    kubectl apply --f deployment.yaml
+
+-> Appyling the service file
+    kubectl apply --f service.yaml
+
+
