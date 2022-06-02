@@ -76,4 +76,8 @@ Create a deployment.yaml file
 -> Appyling the service file
     kubectl apply --f service.yaml
 
+-> Exposing the service
+    minikube service backend
 
+-> Deleting resources
+    kubectl delete -f deployment.yaml -f service.yaml
